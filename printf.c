@@ -9,7 +9,7 @@
 int _printf(const char *format, ...)
 {
 	char *str;
-	int j = 0, i = 0;
+	int j = 0, i = 0, x;
 	va_list args;
 
 	va_start(args, format);
@@ -26,3 +26,25 @@ int _printf(const char *format, ...)
 				_putchar('%');
 				i++;
 			}
+			else if (format[i + 1] == 'c') /* fourth check */
+			{
+				_putchar(va_arg(args, int));
+				i++;
+				else if (format[i + 1] == 's') /* fifth check */
+				{
+					str = va_arg(args, char *);
+					_prints(str);
+					i++;
+				}
+				else if (format[i + 1] == 'i' || format[i + 1] == 'd') /* sixth check */
+				{
+					x = va_arg(args, int);
+					print_int(x);
+					i++;
+				}
+			}
+			i++;
+		}
+		va_end(args);
+}
+
