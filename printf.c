@@ -8,8 +8,7 @@
 
 int _printf(const char *format, ...)
 {
-	char *str;
-	int i = 0, x;
+	int i = 0, cnt = 0;
 	va_list args;
 
 	va_start(args, format);
@@ -18,35 +17,33 @@ int _printf(const char *format, ...)
 		if (format[i] != '%') /* first check */
 		{
 			_putchar(format[i]);
+			cnt++;
 		}
 		else if (format[i] == '%') /* second check */
 		{
 			if (format[i + 1] == '%') /* third check */
 			{
 				_putchar('%');
-				i++;
+				cnt++, i++;
 			}
 			else if (format[i + 1] == 'c') /* fourth check */
 			{
 				_putchar(va_arg(args, int));
-				i++;
+				cnt++, i++;
 			}
 			else if (format[i + 1] == 's') /* fifth check */
 			{
-				str = va_arg(args, char *);
-				_prints(str);
-				i++;
+				_prints(va_arg(args, char *));
+				cnt++, i++;
 			}
 			else if (format[i + 1] == 'i' || format[i + 1] == 'd') /* sixth check */
 			{
-				x = va_arg(args, int);
-				print_int(x);
-				i++;
+				print_int(va_arg(args, int));
+				cnt++, i++;
 			}
 		}
 		i++;
 	}
 	va_end(args);
-	return (0);
+	return (cnt);
 }
-
