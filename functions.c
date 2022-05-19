@@ -38,8 +38,8 @@ void print_int(int n)
 	{
 		_putchar('-');
 		num = -num;
+	}
 		if ((num / 10) > 0)
 			print_int(num / 10);
 		_putchar((num % 10) + '0');
-	}
 }
