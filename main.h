@@ -8,6 +8,7 @@
 #include <limits.h>
 
 int _putchar(char c);
+int (*choice(char s))(va_list);
 void _prints(char *s);
 void print_int(int n);
 int _printf(const char *format, ...);
