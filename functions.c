@@ -93,7 +93,7 @@ int (*choice(char s))(va_list)
 	}
 	else if (s == 'i' || s == 'd')
 	{
-		return (print_i);
+		return (print_int);
 	}
 	return (NULL);
 }
