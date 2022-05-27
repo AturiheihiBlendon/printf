@@ -1,10 +1,10 @@
 #include "main.h"
 
- /**
-  *choice - function to switch
-  *@s: character for switch
-  *Return: 0 (Success)
-  */
+/**
+ *choice - selects functions for conversion specifier
+ *@s: conversion specifier
+ *Return: 0 (Success)
+ */
 int (*choice(char s))(va_list)
 {
 	if (s == 'c')

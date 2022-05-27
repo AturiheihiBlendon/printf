@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
 	if (format != NULL)
 	{
 		va_list args;
-		int i = 0, (*func_select)(va_list);
+		int i = 0, (*fs)(va_list);
 
 		va_start(args, format);
 		if (format[0] == '%' && format[1] == '\0')
@@ -34,8 +34,8 @@ int _printf(const char *format, ...)
 				}
 				else
 				{
-					func_select = choice(format[i + 1]);
-					count += (func_select ? func_select(args) : _putchar(format[i]) + _putchar(format[i + 1]));
+					fs = choice(format[i + 1]);
+					count += (fs ? fs(args) : _putchar(format[i]) + _putchar(format[i + 1]));
 					i++;
 				}
 			}
