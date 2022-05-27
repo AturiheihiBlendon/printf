@@ -77,23 +77,39 @@ int print_int(va_list args)
 	return (count);
 }
 /**
-  *choice - function to switch
-  *@s: character for switch
-  *Return: 0 (Success)
-  */
-int (*choice(char s))(va_list)
+ *print_b - Convert of decimals in binary
+ *@args: Store the argumen values
+ *Return: The count
+ */
+int print_b(va_list args)
 {
-	if (s == 'c')
+	unsigned int i, count, n, bin, arr[32];
+
+	i = 0, count = 0;
+
+	n = va_arg(args, int);
+
+	if (n < 1)
 	{
-		return (print_c);
+		count += _putchar(48);
+		return (count);
 	}
-	else if (s == 's')
+	else
 	{
-		return (print_s);
+		while (n > 0)
+		{
+			bin = n % 2;
+			n /= 2;
+			arr[count] = bin;
+			count++;
+		}
+		i = count - 1;
+		while (i > 0)
+		{
+			_putchar('0' + arr[i]);
+			i--;
+		}
+		_putchar('0' + arr[i]);
 	}
-	else if (s == 'i' || s == 'd')
-	{
-		return (print_int);
-	}
-	return (NULL);
+	return (count);
 }
