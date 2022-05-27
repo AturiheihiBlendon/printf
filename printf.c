@@ -8,40 +8,40 @@
 
 int _printf(const char *format, ...)
 {
-	int count = 0;
+	int count = -1;
 
-	va_list args;
-	int i = 0, (*func_select)(va_list);
-
-	va_start(args, format);
-
-	if (format[0] == '%' && format[1] == '\0')
-		return (count);
-	while (format[i] != '\0')
+	if (format != NULL)
 	{
-		if (format[i] != '%')
+		va_list args;
+		int i = 0, (*func_select)(va_list);
+
+		va_start(args, format);
+		if (format[0] == '%' && format[1] == '\0')
+			return (count);
+		count = 0;
+		while (format[i] != '\0')
 		{
-			count += _putchar(format[i]);
-		}
-		else
-		{
-			if (format[i + 1] == '%')
+			if (format[i] != '%')
 			{
-				count += _putchar('%');
-				i++;
+				count += _putchar(format[i]);
 			}
 			else
 			{
-				func_select = choice(format[i + 1]);
-				if (func_select != NULL)
+				if (format[i + 1] == '%')
 				{
-					count += func_select(args);
+					count += _putchar('%');
+					i++;
+				}
+				else
+				{
+					func_select = choice(format[i + 1]);
+					count += (func_select ? func_select(args) : _putchar(format[i]) + _putchar(format[i + 1]));
 					i++;
 				}
 			}
+			i++;
 		}
-		i++;
+		va_end(args);
 	}
-	va_end(args);
 	return (count);
 }
